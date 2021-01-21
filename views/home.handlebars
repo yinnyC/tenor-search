@@ -4,3 +4,13 @@
   <input type="text" name="term">
   <button type="submit">Search</button>
 </form>
+{{#each gifs}}
+{{!-- set the data-width to whatever you want --}}
+{{!-- Note that we're using properties of the gif (id, itemurl, url) to fill in information needed to render the gif
+--}}
+<div class="tenor-gif-embed" data-postid="{{this.id}}" data-share-method="host" data-width="500px"
+  data-aspect-ratio="1.2266666666666666"><a href="{{this.itemurl}}"></a>
+  <a href="{{this.url}}"></a>
+</div>
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+{{/each}}
