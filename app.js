@@ -1,13 +1,16 @@
 // Require Libraries
 const express = require('express');
+const http = require("http")
 // Load environment variables into process.env
 const dotenv = require("dotenv");
 dotenv.config();
+const apikey = process.env.TENORJS_API_KEY
 const Tenor = require("tenorjs").client({
   "Key": process.env.TENORJS_API_KEY,
   "Filter": "high", 
   "Locale": "en_US", 
 });
+
 // App Setup
 const app = express();
 
@@ -17,10 +20,12 @@ const exphbs  = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use(express.static('public'));
 // ROUTES
 app.get('/', (req, res) => {
   // Handle the home page when we haven't queried yet
   term = ""
+
   if (req.query.term) {
       term = req.query.term
   }
